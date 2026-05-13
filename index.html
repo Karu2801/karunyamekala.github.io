@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Karunya Mekala | Software Engineer Portfolio</title>
+  <meta name="description" content="Portfolio website for Karunya Mekala, Full-Stack Developer and Computer Science graduate specializing in React, Node.js, Python, Machine Learning, and scalable web applications." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --card: #ffffff;
+      --text: #0f172a;
+      --muted: #64748b;
+      --primary: #2563eb;
+      --accent: #7c3aed;
+      --border: #e2e8f0;
+      --shadow: 0 20px 50px rgba(15, 23, 42, 0.08);
+    }
+
+    body.dark {
+      --bg: #020617;
+      --card: #0f172a;
+      --text: #f8fafc;
+      --muted: #94a3b8;
+      --primary: #60a5fa;
+      --accent: #a78bfa;
+      --border: #1e293b;
+      --shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: radial-gradient(circle at top left, rgba(37, 99, 235, 0.16), transparent 35%), var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    .container { width: min(1120px, 92%); margin: 0 auto; }
+
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(16px);
+      background: rgba(255,255,255,0.75);
+      border-bottom: 1px solid var(--border);
+    }
+    body.dark nav { background: rgba(2, 6, 23, 0.75); }
+
+    .nav-inner { display: flex; justify-content: space-between; align-items: center; padding: 16px 0; }
+    .logo { font-weight: 800; font-size: 20px; letter-spacing: -0.03em; }
+    .logo span { color: var(--primary); }
+    .nav-links { display: flex; gap: 22px; align-items: center; }
+    .nav-links a { font-size: 14px; color: var(--muted); font-weight: 600; }
+    .nav-links a:hover { color: var(--primary); }
+
+    .toggle-btn {
+      border: 1px solid var(--border);
+      background: var(--card);
+      color: var(--text);
+      padding: 9px 13px;
+      border-radius: 999px;
+      cursor: pointer;
+      box-shadow: 0 8px 22px rgba(0,0,0,0.06);
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.25fr 0.75fr;
+      gap: 44px;
+      align-items: center;
+      min-height: 86vh;
+      padding: 72px 0;
+    }
+
+    .badge {
+      display: inline-flex;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: rgba(37, 99, 235, 0.10);
+      color: var(--primary);
+      font-weight: 700;
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+
+    .hero h1 {
+      font-size: clamp(42px, 7vw, 78px);
+      line-height: 0.98;
+      letter-spacing: -0.07em;
+      margin-bottom: 22px;
+    }
+
+    .gradient-text {
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero p { font-size: 18px; color: var(--muted); max-width: 680px; margin-bottom: 28px; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 14px; margin-bottom: 28px; }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 13px 18px;
+      border-radius: 14px;
+      font-weight: 800;
+      border: 1px solid var(--border);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .btn:hover { transform: translateY(-3px); box-shadow: var(--shadow); }
+    .btn.primary { background: var(--primary); color: white; border-color: var(--primary); }
+    .btn.secondary { background: var(--card); color: var(--text); }
+
+    .contact-row { display: flex; flex-wrap: wrap; gap: 14px; color: var(--muted); font-weight: 600; font-size: 14px; }
+
+    .profile-card {
+      background: linear-gradient(180deg, rgba(37,99,235,0.12), transparent), var(--card);
+      border: 1px solid var(--border);
+      border-radius: 30px;
+      padding: 28px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .avatar {
+      width: 130px;
+      height: 130px;
+      border-radius: 32px;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      color: white;
+      display: grid;
+      place-items: center;
+      font-size: 42px;
+      font-weight: 900;
+      margin-bottom: 22px;
+    }
+
+    .stat-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin-top: 22px; }
+    .stat { background: rgba(148, 163, 184, 0.10); border: 1px solid var(--border); border-radius: 18px; padding: 16px; }
+    .stat strong { display: block; font-size: 24px; color: var(--primary); }
+
+    section { padding: 76px 0; }
+    .section-title { font-size: 34px; letter-spacing: -0.04em; margin-bottom: 12px; }
+    .section-subtitle { color: var(--muted); max-width: 720px; margin-bottom: 30px; }
+
+    .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 24px;
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.05);
+      transition: transform 0.22s, border-color 0.22s;
+    }
+    .card:hover { transform: translateY(-6px); border-color: var(--primary); }
+    .card h3 { margin-bottom: 10px; font-size: 20px; }
+    .card p { color: var(--muted); font-size: 15px; }
+
+    .chips { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; }
+    .chip { padding: 7px 11px; border-radius: 999px; background: rgba(37, 99, 235, 0.10); color: var(--primary); font-weight: 700; font-size: 12px; }
+
+    .timeline { display: grid; gap: 18px; }
+    .timeline-item { background: var(--card); border: 1px solid var(--border); border-left: 5px solid var(--primary); border-radius: 20px; padding: 22px; }
+    .timeline-item span { color: var(--primary); font-weight: 800; font-size: 14px; }
+
+    .skill-controls { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 22px; }
+    .filter-btn { border: 1px solid var(--border); background: var(--card); color: var(--text); padding: 9px 13px; border-radius: 999px; cursor: pointer; font-weight: 700; }
+    .filter-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+    .skills-list { display: flex; flex-wrap: wrap; gap: 12px; }
+    .skill { background: var(--card); border: 1px solid var(--border); padding: 12px 15px; border-radius: 14px; font-weight: 700; box-shadow: 0 8px 18px rgba(15, 23, 42, 0.04); }
+
+    .contact-card {
+      text-align: center;
+      background: linear-gradient(135deg, rgba(37,99,235,0.13), rgba(124,58,237,0.13)), var(--card);
+      border: 1px solid var(--border);
+      border-radius: 30px;
+      padding: 44px;
+      box-shadow: var(--shadow);
+    }
+
+    footer { text-align: center; padding: 28px; color: var(--muted); border-top: 1px solid var(--border); }
+    .reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    @media (max-width: 860px) {
+      .hero, .grid { grid-template-columns: 1fr; }
+      .nav-links a { display: none; }
+      .hero { min-height: auto; }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="container nav-inner">
+      <a class="logo" href="#home">Karunya<span>.</span></a>
+      <div class="nav-links">
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#experience">Experience</a>
+        <a href="#contact">Contact</a>
+        <button class="toggle-btn" onclick="toggleTheme()">🌙</button>
+      </div>
+    </div>
+  </nav>
+
+  <main id="home" class="container hero">
+    <div class="reveal">
+      <div class="badge">🚀 Full-Stack Developer · ML/Data Science</div>
+      <h1>Building scalable web apps and <span class="gradient-text">intelligent systems.</span></h1>
+      <p>I am Karunya Mekala, a Computer Science graduate and M.S. student at the University of North Texas with 2+ years of experience in React, Node.js, Python, Java, and machine learning.</p>
+      <div class="hero-actions">
+        <a class="btn primary" href="#projects">View Projects</a>
+        <a class="btn secondary" href="mailto:karunyamekala2001@gmail.com">Email Me</a>
+        <a class="btn secondary" href="https://www.linkedin.com/in/karunya-mekala" target="_blank">LinkedIn</a>
+      </div>
+      <div class="contact-row">
+        <span>📍 Denton, TX</span><span>📞 (940) 399-3117</span><span>✉️ karunyamekala2001@gmail.com</span>
+      </div>
+    </div>
+
+    <aside class="profile-card reveal">
+      <div class="avatar">KM</div>
+      <h2>Software Engineer Candidate</h2>
+      <p>Focused on production-ready full-stack products, ML models, clean APIs, and high-impact user experiences.</p>
+      <div class="stat-grid">
+        <div class="stat"><strong>2+</strong><span>Years Experience</span></div>
+        <div class="stat"><strong>3.5</strong><span>Graduate GPA</span></div>
+        <div class="stat"><strong>100%</strong><span>OOB Detection</span></div>
+        <div class="stat"><strong>26%</strong><span>Fault Reduction</span></div>
+      </div>
+    </aside>
+  </main>
+
+  <section id="about" class="container reveal">
+    <h2 class="section-title">About Me</h2>
+    <p class="section-subtitle">I design and develop full-stack web applications, REST APIs, database workflows, and machine learning systems. My background combines software engineering, cloud tools, data science, and AI/ML experimentation.</p>
+  </section>
+
+  <section id="skills" class="container reveal">
+    <h2 class="section-title">Skills</h2>
+    <p class="section-subtitle">Click a category to filter skills interactively.</p>
+    <div class="skill-controls">
+      <button class="filter-btn active" onclick="filterSkills('all', this)">All</button>
+      <button class="filter-btn" onclick="filterSkills('language', this)">Languages</button>
+      <button class="filter-btn" onclick="filterSkills('web', this)">Web</button>
+      <button class="filter-btn" onclick="filterSkills('ml', this)">ML/AI</button>
+      <button class="filter-btn" onclick="filterSkills('tools', this)">Tools</button>
+    </div>
+    <div class="skills-list">
+      <span class="skill language">Python</span><span class="skill language">Java</span><span class="skill language">JavaScript</span><span class="skill language">C++</span><span class="skill language">SQL</span>
+      <span class="skill web">React</span><span class="skill web">Node.js</span><span class="skill web">Express</span><span class="skill web">Flask</span><span class="skill web">HTML/CSS</span>
+      <span class="skill ml">TensorFlow</span><span class="skill ml">Scikit-learn</span><span class="skill ml">XGBoost</span><span class="skill ml">LSTM</span><span class="skill ml">NLP</span>
+      <span class="skill tools">AWS S3</span><span class="skill tools">MongoDB</span><span class="skill tools">Git/GitHub</span><span class="skill tools">REST APIs</span><span class="skill tools">Jupyter</span>
+    </div>
+  </section>
+
+  <section id="projects" class="container reveal">
+    <h2 class="section-title">Featured Projects</h2>
+    <p class="section-subtitle">Project cards highlight real impact, tools, and outcomes.</p>
+    <div class="grid">
+      <article class="card"><h3>Student Performance & Dropout Predictor</h3><p>Predictive ML system that flags at-risk students using academic, demographic, and LMS engagement data.</p><div class="chips"><span class="chip">Python</span><span class="chip">XGBoost</span><span class="chip">SMOTE</span><span class="chip">F1 / ROC-AUC</span></div></article>
+      <article class="card"><h3>BCI Fault-Based Repair Framework</h3><p>Fault repair system for Brain-Computer Interface applications with strong detection and reduction results.</p><div class="chips"><span class="chip">Signal Processing</span><span class="chip">Fault Detection</span><span class="chip">Test Oracles</span></div></article>
+      <article class="card"><h3>Restaurant Management Platform</h3><p>MERN-stack platform with live order status updates, JWT roles, Socket.IO, and AWS S3 media storage.</p><div class="chips"><span class="chip">React</span><span class="chip">Node.js</span><span class="chip">MongoDB</span><span class="chip">Socket.IO</span></div></article>
+    </div>
+  </section>
+
+  <section id="experience" class="container reveal">
+    <h2 class="section-title">Experience & Education</h2>
+    <div class="timeline">
+      <div class="timeline-item"><span>Mar 2022 – Jun 2024</span><h3>Full-Stack Developer · Firenix Technologies</h3><p>Built responsive React interfaces, Node/Express APIs, MySQL/MongoDB schemas, JWT authentication, and third-party integrations in Agile/Scrum teams.</p></div>
+      <div class="timeline-item"><span>In Progress</span><h3>M.S. Computer Science · University of North Texas</h3><p>Graduate studies focused on Computer Science, software engineering, and applied machine learning.</p></div>
+      <div class="timeline-item"><span>Apr 2024</span><h3>B.Tech. Computer Science & Engineering · Jain University</h3><p>Completed undergraduate degree with CGPA 8.42 / 10.</p></div>
+    </div>
+  </section>
+
+  <section id="contact" class="container reveal">
+    <div class="contact-card">
+      <h2 class="section-title">Let’s Build Something Great</h2>
+      <p class="section-subtitle" style="margin-left:auto;margin-right:auto;">I am open to Software Engineer, Full-Stack Developer, ML Engineer, and Data Science opportunities.</p>
+      <div class="hero-actions" style="justify-content:center;"><a class="btn primary" href="mailto:karunyamekala2001@gmail.com">Contact Me</a><a class="btn secondary" href="https://www.linkedin.com/in/karunya-mekala" target="_blank">Connect on LinkedIn</a></div>
+    </div>
+  </section>
+
+  <footer><p>© 2026 Karunya Mekala. Built with HTML, CSS, and JavaScript. Hosted on GitHub Pages.</p></footer>
+
+  <script>
+    function toggleTheme() {
+      document.body.classList.toggle('dark');
+      localStorage.setItem('theme', document.body.classList.contains('dark') ? 'dark' : 'light');
+    }
+    if (localStorage.getItem('theme') === 'dark') document.body.classList.add('dark');
+
+    function filterSkills(category, button) {
+      document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+      button.classList.add('active');
+      document.querySelectorAll('.skill').forEach(skill => {
+        skill.style.display = category === 'all' || skill.classList.contains(category) ? 'inline-flex' : 'none';
+      });
+    }
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
